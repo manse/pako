@@ -1,5 +1,5 @@
 
-/*! pako 2.1.0 https://github.com/nodeca/pako @license (MIT AND Zlib) */
+/*! @manse/pako 2.1.2 https://github.com/nodeca/pako @license (MIT AND Zlib) */
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
@@ -3728,8 +3728,6 @@ function ZStream() {
 
 var zstream = ZStream;
 
-const toString$1 = Object.prototype.toString;
-
 /* Public constants ==========================================================*/
 /* ===========================================================================*/
 
@@ -3880,7 +3878,7 @@ function Deflate$1(options) {
     if (typeof opt.dictionary === 'string') {
       // If we need to compress text, change encoding to utf8.
       dict = strings.string2buf(opt.dictionary);
-    } else if (toString$1.call(opt.dictionary) === '[object ArrayBuffer]') {
+    } else if (opt.dictionary.toString() === '[object ArrayBuffer]') {
       dict = new Uint8Array(opt.dictionary);
     } else {
       dict = opt.dictionary;
@@ -3932,7 +3930,7 @@ Deflate$1.prototype.push = function (data, flush_mode) {
   if (typeof data === 'string') {
     // If we need to compress text, change encoding to utf8.
     strm.input = strings.string2buf(data);
-  } else if (toString$1.call(data) === '[object ArrayBuffer]') {
+  } else if (data.toString() === '[object ArrayBuffer]') {
     strm.input = new Uint8Array(data);
   } else {
     strm.input = data;
@@ -6428,8 +6426,6 @@ function GZheader() {
 
 var gzheader = GZheader;
 
-const toString = Object.prototype.toString;
-
 /* Public constants ==========================================================*/
 /* ===========================================================================*/
 
@@ -6576,7 +6572,7 @@ function Inflate$1(options) {
     // Convert data if needed
     if (typeof opt.dictionary === 'string') {
       opt.dictionary = strings.string2buf(opt.dictionary);
-    } else if (toString.call(opt.dictionary) === '[object ArrayBuffer]') {
+    } else if (opt.dictionary.toString() === '[object ArrayBuffer]') {
       opt.dictionary = new Uint8Array(opt.dictionary);
     }
     if (opt.raw) { //In raw mode we need to set the dictionary early
@@ -6625,7 +6621,7 @@ Inflate$1.prototype.push = function (data, flush_mode) {
   else _flush_mode = flush_mode === true ? Z_FINISH : Z_NO_FLUSH;
 
   // Convert data if needed
-  if (toString.call(data) === '[object ArrayBuffer]') {
+  if (data.toString() === '[object ArrayBuffer]') {
     strm.input = new Uint8Array(data);
   } else {
     strm.input = data;

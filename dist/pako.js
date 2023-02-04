@@ -1,5 +1,5 @@
 
-/*! pako 2.1.0 https://github.com/nodeca/pako @license (MIT AND Zlib) */
+/*! @manse/pako 2.1.2 https://github.com/nodeca/pako @license (MIT AND Zlib) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -3734,8 +3734,6 @@
 
   var zstream = ZStream;
 
-  const toString$1 = Object.prototype.toString;
-
   /* Public constants ==========================================================*/
   /* ===========================================================================*/
 
@@ -3886,7 +3884,7 @@
       if (typeof opt.dictionary === 'string') {
         // If we need to compress text, change encoding to utf8.
         dict = strings.string2buf(opt.dictionary);
-      } else if (toString$1.call(opt.dictionary) === '[object ArrayBuffer]') {
+      } else if (opt.dictionary.toString() === '[object ArrayBuffer]') {
         dict = new Uint8Array(opt.dictionary);
       } else {
         dict = opt.dictionary;
@@ -3938,7 +3936,7 @@
     if (typeof data === 'string') {
       // If we need to compress text, change encoding to utf8.
       strm.input = strings.string2buf(data);
-    } else if (toString$1.call(data) === '[object ArrayBuffer]') {
+    } else if (data.toString() === '[object ArrayBuffer]') {
       strm.input = new Uint8Array(data);
     } else {
       strm.input = data;
@@ -6434,8 +6432,6 @@
 
   var gzheader = GZheader;
 
-  const toString = Object.prototype.toString;
-
   /* Public constants ==========================================================*/
   /* ===========================================================================*/
 
@@ -6582,7 +6578,7 @@
       // Convert data if needed
       if (typeof opt.dictionary === 'string') {
         opt.dictionary = strings.string2buf(opt.dictionary);
-      } else if (toString.call(opt.dictionary) === '[object ArrayBuffer]') {
+      } else if (opt.dictionary.toString() === '[object ArrayBuffer]') {
         opt.dictionary = new Uint8Array(opt.dictionary);
       }
       if (opt.raw) { //In raw mode we need to set the dictionary early
@@ -6631,7 +6627,7 @@
     else _flush_mode = flush_mode === true ? Z_FINISH : Z_NO_FLUSH;
 
     // Convert data if needed
-    if (toString.call(data) === '[object ArrayBuffer]') {
+    if (data.toString() === '[object ArrayBuffer]') {
       strm.input = new Uint8Array(data);
     } else {
       strm.input = data;
